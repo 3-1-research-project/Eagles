@@ -1,3 +1,20 @@
+# Energy Measurement
+To run this project, you first need to start a Postgres database (see https://github.com/3-1-research-project/EnergyMeasurementMVP) and then either use the VS code task `run-minitwit` or, in two separate terminals, run.
+
+Backend terminal
+```bash
+source set-environment-variables.sh
+cd minitwit-api/
+go run minitwit-api.go
+```
+
+Frontend terminal
+```bash
+source set-environment-variables.sh
+cd minitwit-web-app/
+go run minitwit.go
+```
+
 # Welcome to the new MiniTwit app!
 
 ## Apps live here:

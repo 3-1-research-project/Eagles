@@ -1,0 +1,21 @@
+{
+	"name": "Eagles",
+	"image": "mcr.microsoft.com/devcontainers/base:jammy",
+	"features": {
+		"ghcr.io/devcontainers/features/go:1": {}
+	},
+	"runArgs": [
+		"--network=host"
+	],
+	"forwardPorts": [
+		15000,
+		15001
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"golang.Go"
+			]
+		}
+	}
+}
