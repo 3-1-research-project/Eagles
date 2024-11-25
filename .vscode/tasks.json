@@ -1,0 +1,97 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "run-minitwit",
+            "dependsOn": ["backend-start", "frontend-start"],
+            "dependsOrder": "parallel",
+            "problemMatcher": []
+        },
+        {
+            "label": "environment-variables-set",
+            "type": "shell",
+            "linux": {
+                "command": "source set-environment-variables.sh"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "backend-start",
+            "type": "shell",
+            "linux": {
+                "command": "go run minitwit-api.go",
+                "options": {
+                    "cwd": "${workspaceFolder}/minitwit-api/",
+                    "env": {
+                        "DBTYPE": "postgres",
+                        "POSTGRES_USER": "postgres",
+                        "POSTGRES_PW": "1234",
+                        "POSTGRES_HOST": "localhost",
+                        "POSTGRES_PORT": "5432",
+                        "POSTGRES_DB_NAME": "postgres",                        
+                        "POSTGRES_DISABLE_SSL": "true",
+                    }
+                },
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "frontend-start",
+            "type": "shell",
+            "linux": {
+                "command": "go run minitwit.go",
+                "options": {
+                    "cwd": "${workspaceFolder}/minitwit-web-app/",
+                    "env": {
+                        "DBTYPE": "postgres",
+                        "POSTGRES_USER": "postgres",
+                        "POSTGRES_PW": "1234",
+                        "POSTGRES_HOST": "localhost",
+                        "POSTGRES_PORT": "5432",
+                        "POSTGRES_DB_NAME": "postgres",                        
+                        "POSTGRES_DISABLE_SSL": "true",
+                    }
+                },
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "build-frontend",
+            "type": "shell",
+            "linux": {
+                "command": "env",
+                "args": [
+                    "GOOS=linux",
+                    "GOARCH=arm64",
+                    "go",
+                    "build",
+                    "-o",
+                    "go-frontend-arm64-raw"
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}/minitwit-web-app/",
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "build-backend",
+            "type": "shell",
+            "linux": {
+                "command": "env",
+                "args": [
+                    "GOOS=linux",
+                    "GOARCH=arm64",
+                    "go",
+                    "build",
+                    "-o",
+                    "go-backend-arm64-raw"
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}/minitwit-api/",
+                }
+            },
+            "problemMatcher": []
+        }
+    ]
+}
